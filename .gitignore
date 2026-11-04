@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build / Output
+dist/
+build/
+.output/
+
+# Dev
+.DS_Store
+*.log
+*.tsbuildinfo
+.vscode/
+.idea/
+
+# Runtime data
+server/uploads/
+server/output/
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Env
+.env
+.env.local

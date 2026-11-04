@@ -1,0 +1,17 @@
+{
+  "name": "image-processor-server",
+  "version": "1.0.0",
+  "description": "图片处理后端服务（Sharp + Express）",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "multer": "^2.5.0",
+    "sharp": "^0.33.5"
+  }
+}
