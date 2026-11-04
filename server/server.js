@@ -4,6 +4,7 @@ import multer from 'multer';
 import sharp from 'sharp';
 import path from 'node:path';
 import fs from 'node:fs';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -238,6 +239,22 @@ app.use((err, _, res, __) => {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+const HOST = process.env.HOST || '0.0.0.0';
+
+function getLanIp() {
+  const nets = os.networkInterfaces();
+  const ok = ['WLAN', 'Wi-Fi', '以太网', 'Ethernet', 'LAN'];
+  for (const name of Object.keys(nets)) {
+    if (!ok.some(k => name.toLowerCase().includes(k.toLowerCase()))) continue;
+    const iface = nets[name];
+    if (!iface) continue;
+    const ipv4 = iface.find(a => a.family === 'IPv4' && !a.internal);
+    if (ipv4) return ipv4.address;
+  }
+  return 'YOUR_IP';
+}
+
+app.listen(PORT, HOST, () => {
   console.log(`🖼️  图片处理服务已启动: http://localhost:${PORT}`);
+  console.log(`🌐  局域网访问: http://${getLanIp()}:${PORT}`);
 });
